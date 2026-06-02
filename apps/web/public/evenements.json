@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "titre": "Concert acoustique",
+    "categorie": "concert",
+    "lieu_nom": "Sorano",
+    "prix": 5000
+  },
+  {
+    "id": 2,
+    "titre": "Expo photo",
+    "categorie": "expo",
+    "lieu_nom": "Galerie",
+    "prix": 0
+  }
+]
