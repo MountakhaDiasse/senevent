@@ -1,6 +1,6 @@
 import styles from "./EvenementCarte.module.css";
 
-const EvenementCarte = ({ ev, afficherDetails }) => {
+const EvenementCarte = ({ ev, afficherDetails = false }) => {
   const prix = ev.prix === 0 ? "Gratuit" : `${ev.prix} FCFA`;
 
   return (

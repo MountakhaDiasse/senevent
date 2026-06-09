@@ -28,12 +28,12 @@ const App = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.titre}>
+      <h1 className={styles.title}>
         SénEvent — Événements à Dakar
       </h1>
 
       <button
-        className={styles.bouton}
+        className={styles.button}
         onClick={charger}
         disabled={chargement}
       >
@@ -42,10 +42,10 @@ const App = () => {
 
       <SearchBar
         recherche={recherche}
-        onRecherche={setRecherche}
+        setRecherche={setRecherche}
       />
 
-      <p className={styles.compteur}>
+      <p className={styles.counter}>
         {evenementsFiltres.length} événement(s) trouvé(s)
       </p>
 
@@ -58,6 +58,7 @@ const App = () => {
       ))}
     </div>
   );
+  
 };
 
 export default App;

@@ -4,18 +4,20 @@
   font-family: sans-serif;
 }
 
-.titre {
+.title {
   color: #1a3a5c;
+  
 }
 
-.bouton {
+.button {
   padding: 0.6rem 1rem;
   background: #1a3a5c;
   color: white;
   border: none;
   cursor: pointer;
+  margin-bottom: 1rem;
 }
 
-.compteur {
+.counter {
   margin: 1rem 0;
 }
