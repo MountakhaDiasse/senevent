@@ -1,0 +1,21 @@
+.container {
+  max-width: 700px;
+  margin: 2rem auto;
+  font-family: sans-serif;
+}
+
+.titre {
+  color: #1a3a5c;
+}
+
+.bouton {
+  padding: 0.6rem 1rem;
+  background: #1a3a5c;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.compteur {
+  margin: 1rem 0;
+}

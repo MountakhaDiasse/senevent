@@ -1,16 +1,16 @@
 import { useState } from "react";
-import EvenementCarte from "./components/EvenementCarte";
-import SearchBar from "./components/SearchBar";
-import styles from "./App.module.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Accueil from "./pages/Accueil";
+import NouvelEvenement from "./pages/NouvelEvenement";
+import Detail from "./pages/Detail";
+import NavBar from "./components/NavBar";
 
 const App = () => {
   const [evenements, setEvenements] = useState([]);
   const [chargement, setChargement] = useState(false);
-  const [recherche, setRecherche] = useState("");
 
   const charger = async () => {
     setChargement(true);
-
     try {
       const response = await fetch("/evenements.json");
       const data = await response.json();
@@ -18,45 +18,37 @@ const App = () => {
     } catch (error) {
       console.error("Erreur :", error);
     }
-
     setChargement(false);
   };
 
-  const evenementsFiltres = evenements.filter((ev) =>
-    ev.titre.toLowerCase().includes(recherche.toLowerCase())
-  );
+  const ajouterEvenement = (nouvel) => {
+    setEvenements((precedents) => [nouvel, ...precedents]);
+  };
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.titre}>
-        SénEvent — Événements à Dakar
-      </h1>
-
-      <button
-        className={styles.bouton}
-        onClick={charger}
-        disabled={chargement}
-      >
-        {chargement ? "Chargement..." : "Charger les événements"}
-      </button>
-
-      <SearchBar
-        recherche={recherche}
-        onRecherche={setRecherche}
-      />
-
-      <p className={styles.compteur}>
-        {evenementsFiltres.length} événement(s) trouvé(s)
-      </p>
-
-      {evenementsFiltres.map((ev) => (
-        <EvenementCarte
-          key={ev.id}
-          ev={ev}
-          afficherDetails={true}
+    <BrowserRouter>
+      <NavBar />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Accueil
+              evenements={evenements}
+              chargement={chargement}
+              onCharger={charger}
+            />
+          }
         />
-      ))}
-    </div>
+        <Route
+          path="/nouveau"
+          element={<NouvelEvenement onAjouter={ajouterEvenement} />}
+        />
+        <Route
+          path="/evenement/:id"
+          element={<Detail evenements={evenements} />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
