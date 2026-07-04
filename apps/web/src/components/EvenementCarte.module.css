@@ -17,3 +17,8 @@
   font-weight: bold;
   color: #ea7d2b;
 }
+.lien {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}

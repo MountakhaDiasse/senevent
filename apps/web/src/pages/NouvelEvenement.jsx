@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./NouvelEvenement.module.css";
 
 const NouvelEvenement = ({ onAjouter }) => {
+  const navigate = useNavigate();
   const [titre, setTitre] = useState("");
   const [categorie, setCategorie] = useState("concert");
   const [lieu, setLieu] = useState("");
@@ -39,6 +41,7 @@ const NouvelEvenement = ({ onAjouter }) => {
       image_url: `https://placehold.co/400x250/1a3a5c/fff?text=${categorie}`,
     };
     onAjouter(nouvel);
+    navigate("/");
   };
 
   return (
@@ -50,14 +53,14 @@ const NouvelEvenement = ({ onAjouter }) => {
         <input
           type="text"
           value={titre}
-          onChange={e => setTitre(e.target.value)}
+          onChange={(e) => setTitre(e.target.value)}
         />
         {erreurs.titre && <span className={styles.erreur}>{erreurs.titre}</span>}
       </label>
 
       <label className={styles.champ}>
         Categorie
-        <select value={categorie} onChange={e => setCategorie(e.target.value)}>
+        <select value={categorie} onChange={(e) => setCategorie(e.target.value)}>
           <option value="concert">Concert</option>
           <option value="expo">Exposition</option>
           <option value="conference">Conference</option>
@@ -71,7 +74,7 @@ const NouvelEvenement = ({ onAjouter }) => {
         <input
           type="text"
           value={lieu}
-          onChange={e => setLieu(e.target.value)}
+          onChange={(e) => setLieu(e.target.value)}
         />
         {erreurs.lieu && <span className={styles.erreur}>{erreurs.lieu}</span>}
       </label>
@@ -82,7 +85,7 @@ const NouvelEvenement = ({ onAjouter }) => {
           type="number"
           min="0"
           value={prix}
-          onChange={e => setPrix(e.target.value)}
+          onChange={(e) => setPrix(e.target.value)}
         />
         {erreurs.prix && <span className={styles.erreur}>{erreurs.prix}</span>}
       </label>
