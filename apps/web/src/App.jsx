@@ -29,20 +29,19 @@ const App = () => {
   }, []);
 
   const charger = async () => {
-    setChargement(true);
-    try {
-      const response = await fetch("/evenements.json");
-      const data = await response.json();
-      setEvenements(data);
-    } catch (error) {
-      console.error("Erreur :", error);
-    }
-    setChargement(false);
-  };
+  setChargement(true);
+  const { data, error } = await supabase
+    .from("evenements")
+    .select("*, profiles(nom)")
+    .order("date_debut", { ascending: true });
 
-  const ajouterEvenement = (nouvel) => {
-    setEvenements((precedents) => [nouvel, ...precedents]);
-  };
+  if (error) {
+    console.error("Erreur :", error.message);
+  } else {
+    setEvenements(data);
+  }
+  setChargement(false);
+};
 
   return (
     <BrowserRouter>
@@ -60,11 +59,11 @@ const App = () => {
         />
         <Route
           path="/nouveau"
-          element={<NouvelEvenement onAjouter={ajouterEvenement} />}
+          element={<NouvelEvenement onAjoutReussi={charger} />}
         />
         <Route
           path="/evenement/:id"
-          element={<Detail evenements={evenements} />}
+          element={<Detail evenements={evenements} session={session} />}
         />
         <Route path="/auth" element={<Auth />} />
       </Routes>
