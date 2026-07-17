@@ -4,22 +4,26 @@ import Accueil from "./pages/Accueil";
 import NouvelEvenement from "./pages/NouvelEvenement";
 import Detail from "./pages/Detail";
 import NavBar from "./components/NavBar";
+import { supabase } from "./lib/supabase";
 
 const App = () => {
   const [evenements, setEvenements] = useState([]);
   const [chargement, setChargement] = useState(false);
 
   const charger = async () => {
-    setChargement(true);
-    try {
-      const response = await fetch("/evenements.json");
-      const data = await response.json();
-      setEvenements(data);
-    } catch (error) {
-      console.error("Erreur :", error);
-    }
-    setChargement(false);
-  };
+  setChargement(true);
+  const { data, error } = await supabase
+    .from("evenements")
+    .select("*")
+    .order("date_debut", { ascending: true });
+
+  if (error) {
+    console.error("Erreur :", error.message);
+  } else {
+    setEvenements(data);
+  }
+  setChargement(false);
+};
 
   const ajouterEvenement = (nouvel) => {
     setEvenements((precedents) => [nouvel, ...precedents]);
