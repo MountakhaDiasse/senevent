@@ -44,9 +44,9 @@ const App = () => {
           }
         />
         <Route
-          path="/nouveau"
-          element={<NouvelEvenement onAjouter={ajouterEvenement} />}
-        />
+        path="/nouveau"
+        element={<NouvelEvenement onAjoutReussi={charger} />}
+      />
         <Route
           path="/evenement/:id"
           element={<Detail evenements={evenements} />}
