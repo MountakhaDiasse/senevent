@@ -29,19 +29,19 @@ const App = () => {
   }, []);
 
   const charger = async () => {
-    setChargement(true);
-    const { data, error } = await supabase
-      .from("evenements")
-      .select("*")
-      .order("date_debut", { ascending: true });
+  setChargement(true);
+  const { data, error } = await supabase
+    .from("evenements")
+    .select("*, profiles(nom)")
+    .order("date_debut", { ascending: true });
 
-    if (error) {
-      console.error("Erreur :", error.message);
-    } else {
-      setEvenements(data);
-    }
-    setChargement(false);
-  };
+  if (error) {
+    console.error("Erreur :", error.message);
+  } else {
+    setEvenements(data);
+  }
+  setChargement(false);
+};
 
   return (
     <BrowserRouter>
