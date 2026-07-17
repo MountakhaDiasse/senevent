@@ -6,7 +6,6 @@ import NouvelEvenement from "./pages/NouvelEvenement";
 import Detail from "./pages/Detail";
 import Auth from "./pages/Auth";
 import NavBar from "./components/NavBar";
-import { supabase } from "./lib/supabase";
 
 const App = () => {
   const [evenements, setEvenements] = useState([]);
@@ -30,22 +29,18 @@ const App = () => {
   }, []);
 
   const charger = async () => {
-  setChargement(true);
-  const { data, error } = await supabase
-    .from("evenements")
-    .select("*")
-    .order("date_debut", { ascending: true });
+    setChargement(true);
+    const { data, error } = await supabase
+      .from("evenements")
+      .select("*")
+      .order("date_debut", { ascending: true });
 
-  if (error) {
-    console.error("Erreur :", error.message);
-  } else {
-    setEvenements(data);
-  }
-  setChargement(false);
-};
-
-  const ajouterEvenement = (nouvel) => {
-    setEvenements((precedents) => [nouvel, ...precedents]);
+    if (error) {
+      console.error("Erreur :", error.message);
+    } else {
+      setEvenements(data);
+    }
+    setChargement(false);
   };
 
   return (
@@ -63,12 +58,12 @@ const App = () => {
           }
         />
         <Route
-        path="/nouveau"
-        element={<NouvelEvenement onAjoutReussi={charger} />}
-      />
+          path="/nouveau"
+          element={<NouvelEvenement onAjoutReussi={charger} />}
+        />
         <Route
           path="/evenement/:id"
-          element={<Detail evenements={evenements} />}
+          element={<Detail evenements={evenements} session={session} />}
         />
         <Route path="/auth" element={<Auth />} />
       </Routes>
