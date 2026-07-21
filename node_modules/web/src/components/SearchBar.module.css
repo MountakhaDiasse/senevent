@@ -1,0 +1,9 @@
+.conteneur {
+  margin: 1rem 0;
+}
+
+.input {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+}
