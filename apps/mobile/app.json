@@ -1,5 +1,6 @@
 {
   "expo": {
+    "scheme": "senevent",
     "name": "mobile",
     "slug": "mobile",
     "version": "1.0.0",
@@ -24,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "expo-status-bar",
+      "expo-router"
+    ]
+
+    
   }
 }
