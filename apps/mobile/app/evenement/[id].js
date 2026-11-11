@@ -4,6 +4,7 @@ import {
 } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { getEvenements } from "@senevent/shared";
+import BoutonInscription from "../../components/BoutonInscription";
 
 export default function Detail() {
   const { id } = useLocalSearchParams();
@@ -12,10 +13,15 @@ export default function Detail() {
 
   useEffect(() => {
     const charger = async () => {
-      const tous = await getEvenements();
-      const trouve = tous.find((ev) => ev.id === Number(id));
-      setEvenement(trouve ?? null);
-      setChargement(false);
+      try {
+        const tous = await getEvenements();
+        const trouve = tous.find((ev) => ev.id === Number(id));
+        setEvenement(trouve ?? null);
+      } catch (e) {
+        console.log("Erreur detail :", e.message);
+      } finally {
+        setChargement(false);
+      }
     };
     charger();
   }, [id]);
@@ -51,6 +57,8 @@ export default function Detail() {
           <Text style={styles.label}>Prix</Text>
           <Text style={styles.prix}>{prix}</Text>
         </View>
+
+        <BoutonInscription evenementId={evenement.id} />
       </View>
     </ScrollView>
   );
