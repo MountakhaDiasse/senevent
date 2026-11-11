@@ -5,8 +5,5 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ],
-  "devDependencies": {
-    "@types/react": "~19.1.10"
-  }
+  ]
 }

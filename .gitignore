@@ -2,3 +2,4 @@ node_modules/
 apps/mobile/.env
 apps/web/.env.local
 .expo/
+.expo/
