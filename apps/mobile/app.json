@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "SenEvent",
-    "slug": "mobile",
+    "slug": "senevent",
     "scheme": "senevent",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -11,9 +11,10 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "sn.ucad.senevent.mountakha",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#1a3a5c"
       }
     },
     "web": {
@@ -22,6 +23,17 @@
     "plugins": [
       "expo-status-bar",
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "13de3ae8-d44e-4918-88f5-ee7bad85ae9b"
+      }
+    },
+    "owner": "mountakhadiasse"
   }
 }
